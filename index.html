@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripple Effect</title>
+
+    <style>
+        .btn {
+            padding: 20px 40px;
+            font-size: 1.25rem;
+            border: none;
+            background-color: lightgreen;
+            color: black;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s;
+            border-radius: 40px
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: var(--posTop);
+            left: var(--posLeft);
+            translate: -50% -50%;
+            background-color: darkgreen;
+            height: 0;
+            width: 0;
+            border-radius: 50%;
+            transition: all 1s;
+        }
+
+        .btn:hover::after {
+            height: 250px;
+            width: 250px;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        p {
+            margin: 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        .color {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">
+        <p>
+            Ripple
+        </p>
+    </button>
+
+
+    <script>
+        const btn = document.querySelector(".btn");
+        const p = document.querySelector("p");
+
+        btn.addEventListener("mouseover", function(event) {
+            const posX = (event.pageX - btn.offsetLeft);
+            const posY = (event.pageY - btn.offsetTop);
+            console.log(event.pageX - btn.offsetLeft);
+            console.log(event.pageY - btn.offsetTop);
+
+            btn.style.setProperty("--posTop", posY + "px");
+            btn.style.setProperty("--posLeft", posX + "px");
+        });
+    </script>
+</body>
+</html>
